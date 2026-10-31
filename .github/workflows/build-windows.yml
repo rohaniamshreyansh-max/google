@@ -36,10 +36,6 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Enable VBScript for MSI packaging
-        shell: pwsh
-        run: dism.exe /Online /Enable-Feature /FeatureName:VBSCRIPT /All /NoRestart
-
       - name: Build NSIS and MSI installers
         run: npm run tauri -- build --target x86_64-pc-windows-msvc --bundles nsis,msi
 
