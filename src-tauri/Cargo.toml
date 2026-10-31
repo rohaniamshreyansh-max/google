@@ -1,0 +1,25 @@
+[package]
+name = "studio-desk"
+version = "0.1.0"
+description = "A lightweight Gemini Playground desktop client"
+authors = ["Studio Desk"]
+edition = "2021"
+
+[lib]
+name = "studio_desk_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls"] }
+futures-util = "0.3"
+tokio = { version = "1", features = ["macros", "sync"] }
+
+[target.'cfg(windows)'.dependencies]
+# No third-party credential package is needed: the app calls Windows Credential Manager,
+# whose generic credential storage is protected by Windows itself.
